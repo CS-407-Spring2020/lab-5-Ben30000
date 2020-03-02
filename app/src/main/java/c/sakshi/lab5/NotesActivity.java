@@ -39,7 +39,9 @@ public class NotesActivity extends AppCompatActivity {
          */
 
         Intent intent = getIntent();
-        Integer integer = intent.getIntExtra("message",-1);
+        Integer integer = intent.getIntExtra("noteid",-1);
+        Log.i("information","VALUE OF INTEGER IS "+ integer);
+
         noteid = integer;
 
         if (noteid != -1) {
@@ -72,12 +74,13 @@ public class NotesActivity extends AppCompatActivity {
 
 
         if (noteid == -1) {
-
+            Log.i("message","SAVING A NEW NOTE");
             title = "NOTE_" + (WelcomeActivity.notes.size() + 1);
             //Log.i("message","TITLE IS "+title);
             dbHelper.saveNotes(username,title,aNote,date);
         } else {
-            title = "NOTE_" + noteid;
+            Log.i("message","MODIFYING A NOTE ("+noteid+") WITH NEW CONTENT: " + aNote);
+            title = "NOTE_" + (noteid+1);
             dbHelper.updateNote(username,title,aNote,date);
         }
 
